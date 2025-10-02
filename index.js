@@ -84,6 +84,39 @@ for (let i = 0; i < headerSmallMenuLinks.length; i++) {
   }, { passive: true })
 })()
 
+// --- Contact form: open Gmail compose with pre-filled values (or mailto fallback)
+;(function () {
+  const contactForm = document.querySelector('.contact__form')
+  if (!contactForm) return
+
+  contactForm.addEventListener('submit', function (e) {
+    e.preventDefault()
+    const dest = contactForm.dataset.destination || ''
+    const name = (contactForm.querySelector('[name="name"]').value || '').trim()
+    const email = (contactForm.querySelector('[name="email"]').value || '').trim()
+    const message = (contactForm.querySelector('[name="message"]').value || '').trim()
+
+    if (!name || !email || !message) {
+      alert('Please fill in name, email and message before submitting.')
+      return
+    }
+
+    const subject = encodeURIComponent(`Contact from portfolio: ${name}`)
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)
+
+    // If a Gmail destination is provided, open Gmail compose URL in a new tab
+    if (dest && dest.includes('@gmail.com')) {
+      const gmailUrl = `https://saologan9@gmail.com/mail/?view=cm&fs=1&to=${encodeURIComponent(dest)}&su=${subject}&body=${body}`
+      window.open(gmailUrl, '_blank')
+      return
+    }
+
+    // Fallback to mailto (opens default mail client)
+    const mailto = `mailto:${encodeURIComponent(dest || '')}?subject=${subject}&body=${body}`
+    window.location.href = mailto
+  })
+})()
+
 // ---
 const headerLogoConatiner = document.querySelector('.header__logo-container')
 
