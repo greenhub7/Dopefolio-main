@@ -1439,6 +1439,40 @@ textarea {
   cursor: pointer;
 }
 
+/* Extra hover polish for child elements (only where hover is available) */
+@media (hover: hover) and (pointer: fine) {
+  .education-content .row .timeline-item {
+    transition: transform .28s cubic-bezier(.2, .9, .2, 1), box-shadow .28s ease, background .28s ease, border-color .28s ease;
+  }
+
+  .education-content .row .timeline-item .circle-dot {
+    transition: transform .28s ease, box-shadow .28s ease, background .28s ease;
+    transform-origin: center;
+  }
+
+  .education-content .row .timeline-item:hover .circle-dot {
+    transform: scale(1.12) translateY(-2px);
+    box-shadow: 0 10px 28px rgba(3, 63, 133, 0.22);
+    background: linear-gradient(180deg, #0a84ff, #0062b9);
+  }
+
+  .education-content .row .timeline-item:hover::after {
+    /* brighten the left decorative stripe */
+    background: linear-gradient(180deg, #00e0ff, #0074d9);
+    box-shadow: 0 10px 30px rgba(2, 98, 185, 0.18);
+  }
+
+  .education-content .row .timeline-item:hover h3.timeline-title {
+    color: #012f52; /* slightly darker */
+    transform: translateY(-2px);
+    transition: transform .22s ease, color .22s ease;
+  }
+
+  .education-content .row .timeline-item:hover h4.timeline-title {
+    color: #005aa3;
+  }
+}
+
 
 .education-content .row .internship .timeline-item {
   position: relative;
