@@ -84,36 +84,60 @@ for (let i = 0; i < headerSmallMenuLinks.length; i++) {
   }, { passive: true })
 })()
 
-// --- Contact form: open Gmail compose with pre-filled values (or mailto fallback)
+// --- Contact form handler: open user's email client with pre-filled message
 ;(function () {
   const contactForm = document.querySelector('.contact__form')
   if (!contactForm) return
 
   contactForm.addEventListener('submit', function (e) {
     e.preventDefault()
-    const dest = contactForm.dataset.destination || ''
-    const name = (contactForm.querySelector('[name="name"]').value || '').trim()
-    const email = (contactForm.querySelector('[name="email"]').value || '').trim()
-    const message = (contactForm.querySelector('[name="message"]').value || '').trim()
 
-    if (!name || !email || !message) {
-      alert('Please fill in name, email and message before submitting.')
+    const nameEl = contactForm.querySelector('[name="name"]')
+    const emailEl = contactForm.querySelector('[name="email"]')
+    const messageEl = contactForm.querySelector('[name="message"]')
+
+    const name = nameEl ? nameEl.value.trim() : ''
+    const email = emailEl ? emailEl.value.trim() : ''
+    const message = messageEl ? messageEl.value.trim() : ''
+
+    if (!name) {
+      alert('Please enter your name.')
+      nameEl && nameEl.focus()
+      return
+    }
+    if (!email) {
+      alert('Please enter your email.')
+      emailEl && emailEl.focus()
+      return
+    }
+    if (!message) {
+      alert('Please enter a message.')
+      messageEl && messageEl.focus()
       return
     }
 
-    const subject = encodeURIComponent(`Contact from portfolio: ${name}`)
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)
+    // Construct mailto URL
+    const to = 'saologan9@gmail.com'
+    const subject = encodeURIComponent(`Portfolio contact from ${name}`)
+    const bodyLines = []
+    bodyLines.push(`Name: ${name}`)
+    bodyLines.push(`Email: ${email}`)
+    bodyLines.push('')
+    bodyLines.push('Message:')
+    bodyLines.push(message)
+    bodyLines.push('')
+    bodyLines.push(`Sent from: ${location.href}`)
+    const body = encodeURIComponent(bodyLines.join('\n'))
 
-    // If a Gmail destination is provided, open Gmail compose URL in a new tab
-    if (dest && dest.includes('@gmail.com')) {
-      const gmailUrl = `https://saologan9@gmail.com/mail/?view=cm&fs=1&to=${encodeURIComponent(dest)}&su=${subject}&body=${body}`
-      window.open(gmailUrl, '_blank')
-      return
-    }
+    const mailto = `mailto:${to}?subject=${subject}&body=${body}`
 
-    // Fallback to mailto (opens default mail client)
-    const mailto = `mailto:${encodeURIComponent(dest || '')}?subject=${subject}&body=${body}`
+    // try to open the user's email client
     window.location.href = mailto
+
+    // optionally show a small confirmation -- user still needs to send from their email client
+    setTimeout(() => {
+      alert('Your email client should open with a prefilled message. Please press send to deliver the message.')
+    }, 300)
   })
 })()
 
