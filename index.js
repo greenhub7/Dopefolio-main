@@ -175,3 +175,77 @@ if ('IntersectionObserver' in window && timelineItems.length) {
     observer.observe(item)
   })
 }
+
+// --- Pointer-based parallax for project cards (desktop only)
+(function () {
+  if (!window.matchMedia) return
+  const mq = window.matchMedia('(pointer: fine) and (hover: hover)')
+  if (!mq.matches) return // skip on touch/coarse devices
+
+  const cards = document.querySelectorAll('.projects__row')
+  if (!cards.length) return
+
+  cards.forEach((card) => {
+    const img = card.querySelector('.projects__row-img')
+    if (!img) return
+
+    let rafId = null
+    let lastX = 0
+    let lastY = 0
+
+    let isHovered = false
+
+    function onPointerEnter() {
+      isHovered = true
+      if (!rafId) rafId = requestAnimationFrame(update)
+    }
+
+    function onPointerLeave() {
+      isHovered = false
+      if (rafId) cancelAnimationFrame(rafId)
+      rafId = null
+      lastX = 0
+      lastY = 0
+      // smoothly reset
+      img.style.transition = 'transform 280ms cubic-bezier(.2,.9,.2,1)'
+      img.style.transform = ''
+    }
+
+    function onPointerMove(e) {
+      // get pointer relative to card center (-1 .. 1)
+      const rect = card.getBoundingClientRect()
+      const px = (e.clientX - rect.left) / rect.width
+      const py = (e.clientY - rect.top) / rect.height
+      // normalize to -0.5 .. 0.5 then multiply for effect
+      lastX = (px - 0.5) * 2
+      lastY = (py - 0.5) * 2
+      if (!rafId) rafId = requestAnimationFrame(update)
+    }
+
+    function update() {
+      // subtle movement range
+      const maxTranslate = 8 // px
+      const maxRotate = 0.6 // deg
+
+      const tx = -lastX * maxTranslate
+      const ty = -lastY * (maxTranslate * 0.6)
+      const rz = lastX * maxRotate
+      // when hovered/focused we want the photo slightly reduced in scale
+      const hoverScale = 0.98
+      const normalScale = 1.03
+      const scale = isHovered ? hoverScale : normalScale
+
+      // apply transform to image (combine parallax + hover-scale)
+      img.style.transform = `translate3d(${tx}px, ${ty}px, 0) rotate(${rz}deg) scale(${scale})`
+      img.style.transition = 'transform 120ms linear'
+
+      rafId = null
+    }
+    card.addEventListener('pointermove', onPointerMove)
+    card.addEventListener('pointerenter', onPointerEnter)
+    card.addEventListener('pointerleave', onPointerLeave)
+    card.addEventListener('pointerout', onPointerLeave)
+    card.addEventListener('focusin', onPointerEnter)
+    card.addEventListener('focusout', onPointerLeave)
+  })
+})()

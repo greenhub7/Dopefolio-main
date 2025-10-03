@@ -481,51 +481,46 @@ textarea {
 }
 
 .education {
-  background: linear-gradient(180deg, #fbfdff 0%, #ffffff 100%);
-  border-top: 1px solid rgba(2, 18, 54, 0.03);
-  padding: 12rem 0;
-}
-
-.education .heading-sec__main {
-  color: #0062b9;
-  font-size: 3.2rem;
+  /* subtle, modern background and spacing */
+  background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+  border-top: 1px solid rgba(2, 18, 54, 0.04);
+  padding: 10rem 0 14rem 0;
 }
 
 .education__content {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 4.5rem;
-  margin-top: 4rem;
-  align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
+  grid-gap: 3.6rem;
+  margin-top: 3.6rem;
+  align-items: stretch;
 }
 
 .education__item {
-  width: 40vw;
-  height: 20vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
   position: relative;
-  background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
-  padding: 3.2rem 2.4rem 3.2rem 4.2rem;
-  border-radius: 12px;
-  border: 1px solid rgba(0, 98, 185, 0.06);
-  box-shadow: 0 18px 48px rgba(7, 22, 55, 0.06);
-  transition: transform .28s cubic-bezier(.2, .9, .2, 1), box-shadow .28s ease;
-  overflow: visible;
-  min-height: 20rem;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(214, 238, 255, 0.95));
+  padding: 2.8rem 2.4rem 2.8rem 5.2rem;
+  border-radius: 14px;
+  border: 1px solid rgba(2, 98, 185, 0.06);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transition: transform .34s cubic-bezier(.2,.9,.2,1), box-shadow .34s ease, background .28s ease;
+  min-height: 16rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .education__item::before {
+  /* decorative left stripe */
   content: '';
   position: absolute;
-  left: 2.2rem;
+  left: 1.6rem;
   top: 12%;
   bottom: 12%;
-  width: 10px;
+  width: 3px;
   background: linear-gradient(180deg, #00c6ff, #0062b9);
-  border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(2, 98, 185, 0.12);
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(2, 98, 185, 0.12);
 }
 
 .education__logo {
@@ -533,76 +528,151 @@ textarea {
   left: 0.4rem;
   top: 50%;
   transform: translateY(-50%);
-  width: 5.4rem;
-  height: 5.4rem;
-  object-fit: contain;
+  width: 5.2rem;
+  height: 5.2rem;
+  padding: 0.4rem;
+  box-sizing: border-box;
+  display: block;
   background: #fff;
-  padding: 0.6rem;
   border-radius: 50%;
-  box-shadow: 0 8px 20px rgba(7, 22, 55, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  overflow: hidden; /* make sure larger images are clipped to circle */
+  box-shadow: 0 10px 26px rgba(7,22,55,0.06);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+/* ensure the image inside the avatar fills and is cropped nicely */
+.education__logo[src$=".png"],
+.education__logo[src$=".jpg"],
+.education__logo[src$=".jpeg"],
+.education__logo[src$=".svg"] {
+  width: 70px;
+  height: 70px;
+  display: block;
+  object-fit: cover;
+  object-position: center center;
 }
 
 .education__meta {
-  margin-left: 6.8rem;
-  /* make room for logo and stripe */
+  margin-left: 6.2rem; /* room for stripe and logo */
 }
 
 .education__year {
-  font-weight: 900;
+  display: inline-block;
+  background: rgba(0,98,185,0.08);
   color: #024a7a;
-  font-size: 1.6rem;
-  margin-bottom: 0.6rem;
-  letter-spacing: 0.6px;
+  font-weight: 800;
+  padding: .6rem .9rem;
+  border-radius: 999px;
+  font-size: 1.5rem;
+  margin-bottom: .8rem;
 }
 
 .education__item::after {
+  /* soft decorative vignette */
   content: '';
   position: absolute;
-  right: -6%;
+  right: -8%;
   top: -18%;
   width: 60%;
   height: 60%;
-  background: radial-gradient(circle at 20% 20%, rgba(0, 98, 185, 0.06), transparent 30%);
+  background: radial-gradient(circle at 20% 20%, rgba(2,98,185,0.04), transparent 30%);
   transform: rotate(-10deg);
   pointer-events: none;
 }
 
 .education__item:hover {
-  transform: translateY(-10px) scale(1.01);
-  box-shadow: 0 28px 64px rgba(7, 22, 55, 0.12);
+  transform: translateY(-8px);
+  box-shadow: 0 26px 70px rgba(7, 22, 55, 0.12);
+  scale: 1.1;
+  cursor: pointer;
+}
+
+/* entrance animation for cards */
+@keyframes eduPopIn {
+  0% { opacity: 0; transform: translateY(18px) scale(.996); }
+  60% { opacity: 1; transform: translateY(-6px) scale(1.004); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.education__item {
+  opacity: 0;
+  transform-origin: center center;
+  will-change: transform, opacity;
+  animation: eduPopIn .6s cubic-bezier(.2,.9,.2,1) both;
+}
+
+/* stagger the entrance for a pleasant cascade */
+.education__content > .education__item:nth-child(1) { animation-delay: 0s; }
+.education__content > .education__item:nth-child(2) { animation-delay: 0.8s; }
+.education__content > .education__item:nth-child(3) { animation-delay: 1.6s; }
+.education__content > .education__item:nth-child(4) { animation-delay: 0.24s; }
+
+/* interactive hover tilt for pointer devices */
+@media (hover: hover) and (pointer: fine) {
+  .education__item:hover {
+    transform: translateY(-10px) rotate(-0.6deg) scale(1.02);
+    box-shadow: 0 40px 90px rgba(7,22,55,0.12);
+  }
+
+  .education__item:focus-within {
+    outline: 3px solid rgba(0,98,185,0.12);
+    outline-offset: 6px;
+  }
+}
+
+/* improved readability for year badge on small screens */
+@media only screen and (max-width: 56.25em) {
+  .education__year { display: inline-block; padding: .5rem .8rem; font-size: 1.15rem; }
 }
 
 .education__item-title {
-  font-weight: 700;
-  margin-bottom: 0.6rem;
-  font-size: 2rem;
-  color: #023a6b;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+  font-size: 2.3rem;
+  color: #012f52;
 }
 
 .education__item-sub {
-  color: #0062b9;
+  color: #0b66a6;
   font-weight: 700;
-  margin-bottom: 1rem;
-  font-size: 1.6rem;
+  margin-bottom: 0.8rem;
+  font-size: 1.35rem;
 }
 
 .education__item-desc {
-  color: #58606a;
-  line-height: 1.75;
-  font-size: 1.5rem;
+  color: #4e5963;
+  line-height: 1.6;
+  font-size: 1.8rem;
 }
 
 @media only screen and (max-width: 75em) {
   .education__content {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .education__item {
+    padding: 2.6rem 2rem 2.6rem 4.6rem;
+    min-height: 14rem;
+  }
+
+  .education__item-title { font-size: 1.7rem; }
+  .education__item-sub { font-size: 1.25rem; }
+  .education__item-desc { font-size: 1.25rem; }
 }
 
 @media only screen and (max-width: 56.25em) {
   .education__content {
     grid-template-columns: 1fr;
   }
+
+  .education__item {
+    padding: 2.2rem 1.6rem 2.2rem 3.6rem;
+    border-radius: 10px;
+  }
+
+  .education__item-title { font-size: 1.6rem; }
+  .education__item-sub { font-size: 1.1rem; }
+  .education__item-desc { font-size: 1.1rem; line-height: 1.5; }
 
   .education__item {
     padding: 2.4rem 1.8rem 2.4rem 3.2rem;
@@ -726,6 +796,28 @@ textarea {
   }
 }
 
+/* responsive tweaks specifically for education text */
+@media only screen and (max-width: 75em) {
+  .education .heading-sec__main {
+    font-size: 2.4rem;
+  }
+  .education__item-title { font-size: 1.7rem; }
+  .education__item-sub { font-size: 1.3rem; }
+  .education__year { font-size: 1.2rem; }
+  .education__item-desc { font-size: 1.3rem; }
+}
+
+@media only screen and (max-width: 56.25em) {
+  .education .heading-sec__main {
+    font-size: 2.2rem;
+  }
+  .education__item-title { font-size: 1.6rem; }
+  .education__item-sub { font-size: 1.25rem; }
+  .education__year { font-size: 1.2rem; }
+  .education__item-desc { font-size: 1.25rem; line-height: 1.5; }
+  .education__item { padding: 2.4rem 1.8rem 2.4rem 3.2rem; }
+}
+
 .projects__content {
   display: grid;
   /* fluid columns: auto-fit as many 28rem columns as fit, otherwise stretch */
@@ -772,6 +864,7 @@ textarea {
   overflow: hidden;
   align-self: stretch;
   height: 20rem; /* fixed visual height for the image area */
+  position: relative; /* contain hover overlay */
 }
 
 .projects__row-img {
@@ -779,6 +872,62 @@ textarea {
   display: block;
   object-fit: cover;
   height: 100%;
+}
+.projects__row-img:hover{
+  scale: 1.1;
+}
+
+/* Image animations: pop-in on load + subtle hover lift (only on pointer: fine) */
+@keyframes projectsPopIn {
+  0% { opacity: 0; transform: scale(0.98) translateY(6px); }
+  60% { opacity: 1; transform: scale(1.02) translateY(-4px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.projects__row-img {
+  will-change: transform, opacity;
+  transition: transform .6s cubic-bezier(.2,.9,.2,1), box-shadow .4s ease;
+  /* initial pop-in animation */
+  animation: projectsPopIn .58s cubic-bezier(.2,.9,.2,1) both;
+}
+
+/* stagger the pop-in slightly so images don't all pop at once */
+.projects__content > .projects__row:nth-child(1) .projects__row-img { animation-delay: 0s; }
+.projects__content > .projects__row:nth-child(2) .projects__row-img { animation-delay: 0.08s; }
+.projects__content > .projects__row:nth-child(3) .projects__row-img { animation-delay: 0.16s; }
+.projects__content > .projects__row:nth-child(4) .projects__row-img { animation-delay: 0.24s; }
+.projects__content > .projects__row:nth-child(5) .projects__row-img { animation-delay: 0.32s; }
+.projects__content > .projects__row:nth-child(6) .projects__row-img { animation-delay: 0.4s; }
+
+@media (hover: hover) and (pointer: fine) {
+  /* visual hover effects (transform handled by JS to combine with parallax) */
+  .projects__row:hover .projects__row-img,
+  .projects__row:focus-within .projects__row-img {
+    box-shadow: 0 30px 60px rgba(2, 58, 105, 0.18);
+    filter: saturate(1.06) brightness(1.06) contrast(1.02);
+    transition: box-shadow .42s ease, filter .42s ease;
+  }
+
+  /* overlay inside image container to accentuate hover */
+  .projects__row-img-cont::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,98,185,0.06), rgba(0,0,0,0.06));
+    opacity: 0;
+    transition: opacity .38s cubic-bezier(.2,.9,.2,1);
+    pointer-events: none;
+  }
+
+  .projects__row:hover .projects__row-img-cont::after,
+  .projects__row:focus-within .projects__row-img-cont::after {
+    opacity: 0.18;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  /* on touch devices, reduce animation intensity and remove hover transforms */
+  .projects__row-img { animation-duration: .48s; }
 }
 
 .projects__row-content {
@@ -826,7 +975,7 @@ textarea {
   color: #6b7280; /* warm gray */
   max-width: 60rem;
   line-height: 1.75;
-  margin-bottom: 0; /* spacing now handled by grid gap */
+  margin-bottom: 10px; /* spacing now handled by grid gap */
   position: relative;
   padding-left: 2.6rem; /* room for accent */
   transition: transform .22s ease, color .22s ease;
@@ -1430,10 +1579,14 @@ textarea {
   margin-bottom: 1.5rem;
   margin-right: 1.5rem;
   font-size: 1.6rem;
-  background: rgba(153, 153, 153, 0.2);
+  background: rgba(0, 0, 0, 0.8);
   border-radius: 5px;
   font-weight: 600;
-  color: #777;
+  color: #ffffff;
+}
+.skills__skill:hover {
+  scale: 1.1;
+  cursor: pointer;
 }
 
 .mouse {
@@ -1573,12 +1726,12 @@ textarea {
   .education-content .row .timeline-item:hover .circle-dot {
     transform: scale(1.12) translateY(-2px);
     box-shadow: 0 10px 28px rgba(3, 63, 133, 0.22);
-    background: linear-gradient(180deg, #0a84ff, #0062b9);
+    /* background: linear-gradient(180deg, #0a84ff, #0062b9); */
   }
 
   .education-content .row .timeline-item:hover::after {
     /* brighten the left decorative stripe */
-    background: linear-gradient(180deg, #00e0ff, #0074d9);
+    /* background: linear-gradient(180deg, #00e0ff, #0074d9); */
     box-shadow: 0 10px 30px rgba(2, 98, 185, 0.18);
   }
 
