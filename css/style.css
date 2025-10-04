@@ -225,7 +225,7 @@ textarea {
   color: #0062b9;
   background: #fff;
   border: 2px solid #0062b9;
-  box-shadow: none; 
+  box-shadow: none;
   padding: calc(1.5rem - 2px) calc(5rem - 2px);
 }
 
@@ -386,6 +386,7 @@ textarea {
   box-shadow: 0 6px 18px rgba(2, 58, 105, 0.06);
   transition: transform .22s ease, box-shadow .22s ease;
 }
+
 .btn--cv:hover {
   transform: translateY(-4px);
   box-shadow: 0 14px 40px rgba(2, 58, 105, 0.12);
@@ -485,12 +486,12 @@ textarea {
 .education__item {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(214, 238, 255, 0.95));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(214, 238, 255, 0.95));
   padding: 2.8rem 2.4rem 2.8rem 5.2rem;
   border-radius: 14px;
   border: 1px solid rgba(2, 98, 185, 0.06);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-  transition: transform .34s cubic-bezier(.2,.9,.2,1), box-shadow .34s ease, background .28s ease;
+  transition: transform .34s cubic-bezier(.2, .9, .2, 1), box-shadow .34s ease, background .28s ease;
   min-height: 16rem;
   display: flex;
   flex-direction: column;
@@ -522,9 +523,10 @@ textarea {
   display: block;
   background: #fff;
   border-radius: 50%;
-  overflow: hidden; /* make sure larger images are clipped to circle */
-  box-shadow: 0 10px 26px rgba(7,22,55,0.06);
-  border: 1px solid rgba(0,0,0,0.04);
+  overflow: hidden;
+  /* make sure larger images are clipped to circle */
+  box-shadow: 0 10px 26px rgba(7, 22, 55, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 /* ensure the image inside the avatar fills and is cropped nicely */
@@ -540,12 +542,13 @@ textarea {
 }
 
 .education__meta {
-  margin-left: 6.2rem; /* room for stripe and logo */
+  margin-left: 6.2rem;
+  /* room for stripe and logo */
 }
 
 .education__year {
   display: inline-block;
-  background: rgba(0,98,185,0.08);
+  background: rgba(0, 98, 185, 0.08);
   color: #024a7a;
   font-weight: 800;
   padding: .6rem .9rem;
@@ -562,7 +565,7 @@ textarea {
   top: -18%;
   width: 60%;
   height: 60%;
-  background: radial-gradient(circle at 20% 20%, rgba(2,98,185,0.04), transparent 30%);
+  background: radial-gradient(circle at 20% 20%, rgba(2, 98, 185, 0.04), transparent 30%);
   transform: rotate(-10deg);
   pointer-events: none;
 }
@@ -577,40 +580,66 @@ textarea {
 
 /* entrance animation for cards */
 @keyframes eduPopIn {
-  0% { opacity: 0; transform: translateY(18px) scale(.996); }
-  60% { opacity: 1; transform: translateY(-6px) scale(1.004); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(.996);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateY(-6px) scale(1.004);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .education__item {
   opacity: 0;
   transform-origin: center center;
   will-change: transform, opacity;
-  animation: eduPopIn .6s cubic-bezier(.2,.9,.2,1) both;
+  animation: eduPopIn .6s cubic-bezier(.2, .9, .2, 1) both;
 }
 
 /* stagger the entrance for a pleasant cascade */
-.education__content > .education__item:nth-child(1) { animation-delay: 0s; }
-.education__content > .education__item:nth-child(2) { animation-delay: 0.8s; }
-.education__content > .education__item:nth-child(3) { animation-delay: 1.6s; }
-.education__content > .education__item:nth-child(4) { animation-delay: 0.24s; }
+.education__content>.education__item:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.education__content>.education__item:nth-child(2) {
+  animation-delay: 0.8s;
+}
+
+.education__content>.education__item:nth-child(3) {
+  animation-delay: 1.6s;
+}
+
+.education__content>.education__item:nth-child(4) {
+  animation-delay: 0.24s;
+}
 
 /* interactive hover tilt for pointer devices */
 @media (hover: hover) and (pointer: fine) {
   .education__item:hover {
     transform: translateY(-10px) rotate(-0.6deg) scale(1.02);
-    box-shadow: 0 40px 90px rgba(7,22,55,0.12);
+    box-shadow: 0 40px 90px rgba(7, 22, 55, 0.12);
   }
 
   .education__item:focus-within {
-    outline: 3px solid rgba(0,98,185,0.12);
+    outline: 3px solid rgba(0, 98, 185, 0.12);
     outline-offset: 6px;
   }
 }
 
 /* improved readability for year badge on small screens */
 @media only screen and (max-width: 56.25em) {
-  .education__year { display: inline-block; padding: .5rem .8rem; font-size: 1.15rem; }
+  .education__year {
+    display: inline-block;
+    padding: .5rem .8rem;
+    font-size: 1.15rem;
+  }
 }
 
 .education__item-title {
@@ -643,9 +672,17 @@ textarea {
     min-height: 14rem;
   }
 
-  .education__item-title { font-size: 1.7rem; }
-  .education__item-sub { font-size: 1.25rem; }
-  .education__item-desc { font-size: 1.25rem; }
+  .education__item-title {
+    font-size: 1.7rem;
+  }
+
+  .education__item-sub {
+    font-size: 1.25rem;
+  }
+
+  .education__item-desc {
+    font-size: 1.25rem;
+  }
 }
 
 @media only screen and (max-width: 56.25em) {
@@ -658,9 +695,18 @@ textarea {
     border-radius: 10px;
   }
 
-  .education__item-title { font-size: 1.6rem; }
-  .education__item-sub { font-size: 1.1rem; }
-  .education__item-desc { font-size: 1.1rem; line-height: 1.5; }
+  .education__item-title {
+    font-size: 1.6rem;
+  }
+
+  .education__item-sub {
+    font-size: 1.1rem;
+  }
+
+  .education__item-desc {
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
 
   .education__item {
     padding: 2.4rem 1.8rem 2.4rem 3.2rem;
@@ -789,21 +835,49 @@ textarea {
   .education .heading-sec__main {
     font-size: 2.4rem;
   }
-  .education__item-title { font-size: 1.7rem; }
-  .education__item-sub { font-size: 1.3rem; }
-  .education__year { font-size: 1.2rem; }
-  .education__item-desc { font-size: 1.3rem; }
+
+  .education__item-title {
+    font-size: 1.7rem;
+  }
+
+  .education__item-sub {
+    font-size: 1.3rem;
+  }
+
+  .education__year {
+    font-size: 1.2rem;
+  }
+
+  .education__item-desc {
+    font-size: 1.3rem;
+  }
 }
 
 @media only screen and (max-width: 56.25em) {
   .education .heading-sec__main {
     font-size: 2.2rem;
   }
-  .education__item-title { font-size: 1.6rem; }
-  .education__item-sub { font-size: 1.25rem; }
-  .education__year { font-size: 1.2rem; }
-  .education__item-desc { font-size: 1.25rem; line-height: 1.5; }
-  .education__item { padding: 2.4rem 1.8rem 2.4rem 3.2rem; }
+
+  .education__item-title {
+    font-size: 1.6rem;
+  }
+
+  .education__item-sub {
+    font-size: 1.25rem;
+  }
+
+  .education__year {
+    font-size: 1.2rem;
+  }
+
+  .education__item-desc {
+    font-size: 1.25rem;
+    line-height: 1.5;
+  }
+
+  .education__item {
+    padding: 2.4rem 1.8rem 2.4rem 3.2rem;
+  }
 }
 
 .projects__content {
@@ -821,7 +895,8 @@ textarea {
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr;
   grid-gap: 1.8rem;
-  margin-bottom: 0; /* spacing controlled by container grid-gap */
+  margin-bottom: 0;
+  /* spacing controlled by container grid-gap */
   align-items: start;
   height: 100%;
 }
@@ -851,8 +926,10 @@ textarea {
 .projects__row-img-cont {
   overflow: hidden;
   align-self: stretch;
-  height: 20rem; /* fixed visual height for the image area */
-  position: relative; /* contain hover overlay */
+  height: 20rem;
+  /* fixed visual height for the image area */
+  position: relative;
+  /* contain hover overlay */
 }
 
 .projects__row-img {
@@ -861,34 +938,64 @@ textarea {
   object-fit: cover;
   height: 100%;
 }
-.projects__row-img:hover{
+
+.projects__row-img:hover {
   scale: 1.1;
   transition: 0.8s;
 }
 
 /* Image animations: pop-in on load + subtle hover lift (only on pointer: fine) */
 @keyframes projectsPopIn {
-  0% { opacity: 0; transform: scale(0.98) translateY(6px); }
-  60% { opacity: 1; transform: scale(1.02) translateY(-4px); }
-  100% { opacity: 1; transform: scale(1) translateY(0); }
+  0% {
+    opacity: 0;
+    transform: scale(0.98) translateY(6px);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale(1.02) translateY(-4px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 .projects__row-img {
   will-change: transform, opacity;
-  transition: transform .6s cubic-bezier(.2,.9,.2,1), box-shadow .4s ease;
+  transition: transform .6s cubic-bezier(.2, .9, .2, 1), box-shadow .4s ease;
   /* initial pop-in animation */
-  animation: projectsPopIn .58s cubic-bezier(.2,.9,.2,1) both;
+  animation: projectsPopIn .58s cubic-bezier(.2, .9, .2, 1) both;
 }
 
 /* stagger the pop-in slightly so images don't all pop at once */
-.projects__content > .projects__row:nth-child(1) .projects__row-img { animation-delay: 0s; }
-.projects__content > .projects__row:nth-child(2) .projects__row-img { animation-delay: 0.08s; }
-.projects__content > .projects__row:nth-child(3) .projects__row-img { animation-delay: 0.16s; }
-.projects__content > .projects__row:nth-child(4) .projects__row-img { animation-delay: 0.24s; }
-.projects__content > .projects__row:nth-child(5) .projects__row-img { animation-delay: 0.32s; }
-.projects__content > .projects__row:nth-child(6) .projects__row-img { animation-delay: 0.4s; }
+.projects__content>.projects__row:nth-child(1) .projects__row-img {
+  animation-delay: 0s;
+}
+
+.projects__content>.projects__row:nth-child(2) .projects__row-img {
+  animation-delay: 0.08s;
+}
+
+.projects__content>.projects__row:nth-child(3) .projects__row-img {
+  animation-delay: 0.16s;
+}
+
+.projects__content>.projects__row:nth-child(4) .projects__row-img {
+  animation-delay: 0.24s;
+}
+
+.projects__content>.projects__row:nth-child(5) .projects__row-img {
+  animation-delay: 0.32s;
+}
+
+.projects__content>.projects__row:nth-child(6) .projects__row-img {
+  animation-delay: 0.4s;
+}
 
 @media (hover: hover) and (pointer: fine) {
+
   /* visual hover effects (transform handled by JS to combine with parallax) */
   .projects__row:hover .projects__row-img,
   .projects__row:focus-within .projects__row-img {
@@ -902,9 +1009,9 @@ textarea {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(0,98,185,0.06), rgba(0,0,0,0.06));
+    background: linear-gradient(180deg, rgba(0, 98, 185, 0.06), rgba(0, 0, 0, 0.06));
     opacity: 0;
-    transition: opacity .38s cubic-bezier(.2,.9,.2,1);
+    transition: opacity .38s cubic-bezier(.2, .9, .2, 1);
     pointer-events: none;
   }
 
@@ -914,9 +1021,13 @@ textarea {
   }
 }
 
-@media (hover: none), (pointer: coarse) {
+@media (hover: none),
+(pointer: coarse) {
+
   /* on touch devices, reduce animation intensity and remove hover transforms */
-  .projects__row-img { animation-duration: .48s; }
+  .projects__row-img {
+    animation-duration: .48s;
+  }
 }
 
 .projects__row-content {
@@ -927,13 +1038,15 @@ textarea {
   align-self: stretch;
   align-items: flex-start;
   position: relative;
-  padding-bottom: 2.4rem; /* reserve space for the baseline line */
+  padding-bottom: 2.4rem;
+  /* reserve space for the baseline line */
 }
 
 @media only screen and (max-width: 56.25em) {
   .projects__row-img-cont {
     height: 14rem;
   }
+
   .projects__row-content {
     padding: 1.6rem 0;
     align-items: center;
@@ -941,7 +1054,8 @@ textarea {
   }
 
   .projects__row-content .btn {
-    justify-self: center; /* keep visual centering for flex children */
+    justify-self: center;
+    /* keep visual centering for flex children */
     align-self: center;
   }
 }
@@ -961,12 +1075,15 @@ textarea {
 .projects__row-content-desc {
   font-size: 1.8rem;
   font-style: italic;
-  color: #6b7280; /* warm gray */
+  color: #6b7280;
+  /* warm gray */
   max-width: 60rem;
   line-height: 1.75;
-  margin-bottom: 10px; /* spacing now handled by grid gap */
+  margin-bottom: 10px;
+  /* spacing now handled by grid gap */
   position: relative;
-  padding-left: 2.6rem; /* room for accent */
+  padding-left: 2.6rem;
+  /* room for accent */
   transition: transform .22s ease, color .22s ease;
 }
 
@@ -980,7 +1097,7 @@ textarea {
   width: 6px;
   border-radius: 6px;
   background: linear-gradient(180deg, #00c6ff 0%, #0062b9 100%);
-  box-shadow: 0 8px 20px rgba(0,98,185,0.12);
+  box-shadow: 0 8px 20px rgba(0, 98, 185, 0.12);
   transform-origin: center;
 }
 
@@ -998,11 +1115,11 @@ textarea {
   right: 0;
   bottom: -0.6rem;
   height: 4px;
-  background: linear-gradient(90deg, rgba(0,198,255,0.12), rgba(0,98,185,0.18));
+  background: linear-gradient(90deg, rgba(0, 198, 255, 0.12), rgba(0, 98, 185, 0.18));
   border-radius: 4px;
   transform: scaleX(0);
   transform-origin: left center;
-  transition: transform .36s cubic-bezier(.2,.9,.2,1), opacity .2s;
+  transition: transform .36s cubic-bezier(.2, .9, .2, 1), opacity .2s;
   opacity: 0;
 }
 
@@ -1020,18 +1137,21 @@ textarea {
   /* place the line roughly in the middle of the bottom row (where the button sits) */
   bottom: 1.2rem;
   height: 2px;
-  background: linear-gradient(90deg, rgba(0,198,255,0.12), rgba(0,98,185,0.18));
+  background: linear-gradient(90deg, rgba(0, 198, 255, 0.12), rgba(0, 98, 185, 0.18));
   border-radius: 2px;
   opacity: 0.9;
   pointer-events: none;
 }
 
 /* ensure the Case Study button sits on the second (bottom) grid row and is vertically centered on the baseline */
-.projects__row-content > .btn {
-  margin-top: auto; /* push the button to the bottom of the content area */
-  justify-self: start; /* keep the button to the left like before (no effect in flex) */
+.projects__row-content>.btn {
+  margin-top: auto;
+  /* push the button to the bottom of the content area */
+  justify-self: start;
+  /* keep the button to the left like before (no effect in flex) */
   align-self: flex-start;
-  background-clip: padding-box; /* avoid pseudo-element bleed */
+  background-clip: padding-box;
+  /* avoid pseudo-element bleed */
 }
 
 /* optional inline highlight: wrap words in <span class="highlight"> to show gradient text */
@@ -1048,6 +1168,7 @@ textarea {
     left: 0.4rem;
     width: 5px;
   }
+
   .projects__row-content-desc {
     padding-left: 2rem;
   }
@@ -1573,6 +1694,7 @@ textarea {
   font-weight: 600;
   color: #ffffff;
 }
+
 .skills__skill:hover {
   scale: 1.1;
   transition: 0.7s;
@@ -1660,24 +1782,24 @@ textarea {
   display: flex;
   flex-direction: column;
   justify-content: center;
-   padding: -20px 15px;
-   width: 80%;
-   position: relative;
-   color: #ffffff;
-   background: transparent;
-   border: none;
+  padding: -20px 15px;
+  width: 80%;
+  position: relative;
+  color: #ffffff;
+  background: transparent;
+  border: none;
 }
 
 .education-content .row .timeline-item {
   position: relative;
   padding-left: 37px;
   padding-bottom: 50px;
-   padding: 3.2rem 2.4rem 3.2rem 4.2rem;
-   margin-bottom: 2.4rem;
-   background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(214, 238, 255, 0.95));
-   border-radius: 12px;
-   border: 1px solid rgba(0, 98, 185, 0.06);
-   box-shadow: 0 18px 48px rgba(7, 22, 55, 0.06);
+  padding: 3.2rem 2.4rem 3.2rem 4.2rem;
+  margin-bottom: 2.4rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(214, 238, 255, 0.95));
+  border-radius: 12px;
+  border: 1px solid rgba(0, 98, 185, 0.06);
+  box-shadow: 0 18px 48px rgba(7, 22, 55, 0.06);
   transition: transform .28s cubic-bezier(.2, .9, .2, 1), box-shadow .28s ease;
 }
 
@@ -1721,6 +1843,20 @@ textarea {
   } */
 }
 
+.experience_image {
+  width: 200px;
+  height: 200px;
+  opacity: 0.1;
+  position: absolute;
+  bottom: 8%;
+  left: 40%;
+  z-index: -1;
+}
+
+.experience_each_bottom {
+  display: flex;
+  position: relative;
+}
 
 .education-content .row .internship .timeline-item {
   position: relative;
@@ -1766,13 +1902,24 @@ textarea {
 }
 
 .education-content .row .timeline-item.in-view {
-  animation: flowInUp .6s cubic-bezier(.2,.9,.2,1) forwards;
+  animation: flowInUp .6s cubic-bezier(.2, .9, .2, 1) forwards;
 }
 
 @keyframes flowInUp {
-  0% { opacity: 0; transform: translateY(20px); }
-  60% { opacity: 1; transform: translateY(-6px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateY(-6px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .education-content .row .internship .timeline-title {
@@ -1792,24 +1939,28 @@ textarea {
 }
 
 /* Distinguish job title, company and date within timeline items */
-.education-content .row .timeline-item > h3.timeline-title {
-  font-size: 2.4rem; /* larger job title */
-  color: #012f52; /* deep blue like education title */
+.education-content .row .timeline-item>h3.timeline-title {
+  font-size: 2.4rem;
+  /* larger job title */
+  color: #012f52;
+  /* deep blue like education title */
   margin-bottom: 1.6rem;
   letter-spacing: 0.2px;
 }
 
-.education-content .row .timeline-item > h4.timeline-title {
-  font-size: 1.6rem; /* company */
-  color: #0b66a6; /* accent blue */
+.education-content .row .timeline-item>h4.timeline-title {
+  font-size: 1.6rem;
+  /* company */
+  color: #0b66a6;
+  /* accent blue */
   font-weight: 700;
   margin-bottom: 1.4rem;
 }
 
 /* date / meta line (second h4) */
-.education-content .row .timeline-item > h4.timeline-title:last-of-type {
-display: inline-block;
-  background: rgba(0,98,185,0.08);
+.education-content .row .timeline-item>h4.timeline-title:last-of-type {
+  display: inline-block;
+  background: rgba(0, 98, 185, 0.08);
   color: #024a7a;
   font-weight: 800;
   padding: .6rem .9rem;
@@ -1820,12 +1971,14 @@ display: inline-block;
 
 /* make timeline text slightly softer on small screens */
 @media only screen and (max-width: 56.25em) {
-  .education-content .row .timeline-item > h3.timeline-title {
+  .education-content .row .timeline-item>h3.timeline-title {
     font-size: 2rem;
   }
-  .education-content .row .timeline-item > h4.timeline-title {
+
+  .education-content .row .timeline-item>h4.timeline-title {
     font-size: 1.5rem;
   }
+
   .education-content .row .timeline-text {
     font-size: 1.5rem;
   }
